@@ -8,17 +8,8 @@ namespace Service.Data.Models
 {
     public class User : IdentityUser<Guid>
     {
-        public User()
-        {
-            Roles = new HashSet<UserRole>();
-        }
-
         [Key]
         public override Guid Id { get; set; }
 
-
-
-        [InverseProperty(nameof(UserRole.User))]
-        public virtual ICollection<UserRole> Roles { get; set; }
     }
 }

@@ -24,10 +24,10 @@ namespace Service
 
         public static void UseServiceAuthentication(this IServiceCollection services, string jwtValidAudience, string jwtValidIssuer, string jwtSecret)
         {
-            services.AddScoped<Service.Services.AuthenticationService>();
+            services.AddScoped<Services.AuthenticationService>();
 
             // For Identity  
-            services.AddIdentity<User, Role>()
+            services.AddIdentity<User, IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<ServiceContext>()
                 .AddDefaultTokenProviders();
 

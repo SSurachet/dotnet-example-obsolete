@@ -34,7 +34,7 @@ namespace Service.Services
             if (user == null)
                 throw new KeyNotFoundException("User isn't exist.");
 
-            if (await userManager.CheckPasswordAsync(user, model.Password))
+            if (await userManager.CheckPasswordAsync(user, model.Password) == false)
                 throw new ArgumentException("Password isn't correct.");
 
             var userRoles = await userManager.GetRolesAsync(user);
