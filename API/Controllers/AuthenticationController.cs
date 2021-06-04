@@ -1,5 +1,6 @@
 
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.Models;
 using Service.Services;
@@ -7,6 +8,7 @@ using Service.Services;
 namespace API.Controllers
 {
     [Route("api/auth")]
+    [AllowAnonymous]
     public class AuthenticationController : BaseController
     {
         private AuthenticationService authenticationService;
