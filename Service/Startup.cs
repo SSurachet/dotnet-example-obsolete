@@ -64,7 +64,7 @@ namespace Service
                 Scheme = "Bearer",
                 BearerFormat = "JWT",
                 In = ParameterLocation.Header,
-                Description = "Bear {Token}",
+                Description = "Bearer {Token}",
             });
 
             options.AddSecurityRequirement(new OpenApiSecurityRequirement
