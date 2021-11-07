@@ -1,10 +1,10 @@
 using System;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -83,21 +83,17 @@ namespace Service
             });
         }
 
-        public static void MigrateServiceContext(this IHost host)
+        public static void MigrateServiceContext(this IApplicationBuilder app, IServiceProvider serviceProvider)
         {
-            using (var scope = host.Services.CreateScope())
+            try
             {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    var context = services.GetRequiredService<ServiceContext>();
-                    context.Database.Migrate();
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger>();
-                    logger.LogError(ex, "An error occurred migrating the ServiceContext Database.");
-                }
+                var context = serviceProvider.GetService<ServiceContext>();
+                context.Database.Migrate();
+            }
+            catch (Exception ex)
+            {
+                var logger = serviceProvider.GetService<ILogger<ServiceContext>>();
+                logger.LogError(ex, "An error occurred migrating the ServiceContext Database.");
             }
         }
 
