@@ -83,6 +83,10 @@ namespace Service
             });
         }
 
+        /// <summary>
+        /// Migrate database.
+        /// Don't use in Production enviroment.
+        /// </summary>
         public static void MigrateServiceContext(this IApplicationBuilder app, IServiceProvider serviceProvider)
         {
             try

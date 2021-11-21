@@ -15,7 +15,7 @@ namespace API.Controllers
         [AllowAnonymous]
         public ActionResult<DateTime> GetSystemDateTime()
         {
-            return DateTime.UtcNow;
+            return Ok(DateTime.UtcNow);
         }
 
         [Route("error")]
