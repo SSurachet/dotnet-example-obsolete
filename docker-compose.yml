@@ -6,17 +6,22 @@ services:
     volumes:
       - dotnet-example-data:/var/lib/mysql
     environment: 
-      ACCEPT_EULA: Y
-      SA_PASSWORD: ""
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "@minPass123"
     ports: 
       - 1433:1433
   
   app: 
-    image: dotnet-example
+    build:
+      context: .
+      dockerfile: ./API/Dockerfile
+      args:
+        ENV_NAME: "Development"
     depends_on:
       - db
     ports:
       - 80:80
+      - 443:443
 
 volumes:
   dotnet-example-data:
