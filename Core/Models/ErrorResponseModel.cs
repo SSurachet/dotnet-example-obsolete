@@ -1,5 +1,8 @@
 namespace Core.Model
 {
+    /// <summary>
+    /// Contain exception details.
+    /// </summary>
     public class ErrorResponseModel
     {
         public string Code { get; set; }

@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Core.Middleware
 {
+    /// <summary>
+    /// Catch any exception response and rewrite response with proper HTTP code and body
+    /// </summary>
     public class ErrorHandlerMiddleware
     {
         private readonly RequestDelegate next;

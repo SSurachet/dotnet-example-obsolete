@@ -10,18 +10,29 @@ services:
       SA_PASSWORD: "@minPass123"
     ports: 
       - 1433:1433
+    networks:
+      dotnet-example-network:
+        aliases:
+          - db
   
   app: 
     build:
       context: .
       dockerfile: ./API/Dockerfile
-      args:
-        ENV_NAME: "Development"
+    environment: 
+      ENV_NAME: "Development.Docker"
     depends_on:
       - db
     ports:
       - 80:80
       - 443:443
+    networks:
+      dotnet-example-network:
+        aliases:
+          - app
 
 volumes:
   dotnet-example-data:
+
+networks:
+  dotnet-example-network:
