@@ -23,7 +23,11 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.UseServiceContext(Configuration.GetConnectionString("ServiceContextConnection"));
-            services.UseServiceAuthentication(Configuration["JWT:ValidAudience"], Configuration["JWT:ValidIssuer"], Configuration["JWT:Secret"]);
+            services.UseServiceAuthentication(
+                Configuration.GetSection("JWT:ValidAudience").Get<string>(),
+                Configuration.GetSection("JWT:ValidIssuer").Get<string>(),
+                Configuration.GetSection("JWT:Secret").Get<string>()
+            );
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
